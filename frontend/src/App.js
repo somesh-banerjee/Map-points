@@ -12,10 +12,11 @@ function App() {
       <Map
       {...viewState}
       onMove={evt => setViewState(evt.viewState)}
-      style={{width: 800, height: 600}}
+      style={{width: "100vw", height: "100vh"}}
       mapStyle="mapbox://styles/mapbox/streets-v9"
       mapboxAccessToken={process.env.REACT_APP_MAPBOX}
     >
+      <Marker longitude={88.36} latitude={22.572645} color="red" />
     </Map>
     </div>
   );
