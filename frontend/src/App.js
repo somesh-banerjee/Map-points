@@ -9,6 +9,11 @@ function App() {
 
   const [pins,setPins] = useState([]);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
+  const [currentUsername, setCurrentUsername] = useState("user");
+  const [newPlace, setNewPlace] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [review, setReview] = useState(null);
+  const [rating, setRating] = useState(0);
   const [viewState, setViewState] =   useState({
     latitude: 22.572645,
     longitude: 88.363892,
@@ -28,8 +33,26 @@ function App() {
   },[])
 
   const handleMarkerClick = (id,lat,long) =>{
-    console.log("clicked")
-    setCurrentPlaceId(id);
+    setCurrentPlaceId(id)
+    setViewState({
+      ...viewState,
+      latitude: lat,
+      longitude: long,
+    })
+  }
+
+  const handleAddPlace = (e) =>{
+    setNewPlace({
+      long: e.lngLat.lng,
+      lat: e.lngLat.lat,
+    })
+  }
+
+  const handleSubmit = (e) =>{
+    setNewPlace({
+      long: e.lngLat.lng,
+      lat: e.lngLat.lat,
+    })
   }
 
   return (
@@ -40,6 +63,8 @@ function App() {
       style={{width: "100vw", height: "100vh"}}
       mapStyle="mapbox://styles/mapbox/streets-v9"
       mapboxAccessToken={process.env.REACT_APP_MAPBOX}
+      onDblClick = {handleAddPlace}
+      // transitionDuration="200"
     >
       {
         pins.map(p=>(
@@ -51,8 +76,8 @@ function App() {
               <Room
                 style={{
                   fontSize: 7 * viewState.zoom,
-                  // color:
-                  //   currentUsername === p.username ? "tomato" : "slateblue",
+                  color:
+                    currentUsername === p.username ? "blue" : "green",
                   cursor: "pointer",
                 }}
                 onClick={() => handleMarkerClick(p._id, p.lat, p.long)}    
@@ -72,11 +97,7 @@ function App() {
                   <p>{p.desc}</p>
                   <label>Rating</label>
                   <div className='stars'>
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
+                    {Array(p.rating).fill(<Star />)}
                   </div>
                   <label>Information</label>
                   <span className='username'>Created by {p.username}</span>
@@ -89,7 +110,32 @@ function App() {
           </div>
         ))
       }
-      
+      {newPlace && (
+        <Popup
+          longitude={newPlace.long}
+          latitude={newPlace.lat}
+          closeOnClick={false}
+          onClose={() => setNewPlace(null)}
+          anchor="left">
+          <div>
+            <form onSubmit={handleSubmit}>
+              <label>Title</label>
+              <input onChange={(e)=>setTitle(e.target.value)} />
+              <label>Review</label>
+              <textarea onChange={(e)=>setReview(e.target.value)} />
+              <label>Rating</label>
+              <select onChange={(e)=>setRating(e.target.value)}>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              <button type='submit'>Submit</button>
+            </form>
+          </div>
+        </Popup>
+      )}
     </Map>
     </div>
   );

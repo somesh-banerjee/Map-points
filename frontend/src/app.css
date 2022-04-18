@@ -6,6 +6,24 @@
     justify-content: space-around;
 }
 
+form{
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+input,textarea{
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+input::placeholder,textarea::placeholder{
+    font-size: 12px;
+    color: black;
+}
+
 label{
     width: max-content;
     color: tomato;
