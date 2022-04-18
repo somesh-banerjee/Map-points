@@ -48,11 +48,24 @@ function App() {
     })
   }
 
-  const handleSubmit = (e) =>{
-    setNewPlace({
-      long: e.lngLat.lng,
-      lat: e.lngLat.lat,
-    })
+  const handleSubmit = async(e) =>{
+    e.preventDefault();
+    const newPin = {
+      username: currentUsername,
+      title,
+      desc: review,
+      rating,
+      lat: newPlace.lat,
+      long: newPlace.long,
+    }
+
+    try {
+      const res = await axios.post("/pins",newPin)
+      setPins([...pins, res.data])
+      setNewPlace(null)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
