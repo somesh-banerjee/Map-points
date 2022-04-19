@@ -3,17 +3,20 @@ import Map,{ Marker,Popup } from 'react-map-gl';
 import { Star,Room } from '@material-ui/icons';
 import './app.css';
 import axios from 'axios';
+import Register from './components/Register';
 //import { format } from 'timeago.js';
 
 function App() {
 
   const [pins,setPins] = useState([]);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
-  const [currentUsername, setCurrentUsername] = useState("user");
+  const [currentUsername, setCurrentUsername] = useState(null);
   const [newPlace, setNewPlace] = useState(null);
   const [title, setTitle] = useState(null);
   const [review, setReview] = useState(null);
   const [rating, setRating] = useState(0);
+  const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   const [viewState, setViewState] =   useState({
     latitude: 22.572645,
     longitude: 88.363892,
@@ -149,6 +152,17 @@ function App() {
           </div>
         </Popup>
       )}
+
+      {currentUsername ? (
+        <button className='button logout'>Log out</button>
+      ) : (
+        <div className='buttons'>
+          <button className='button'>Log in</button>
+          <button className='button'>Register</button>
+        </div>
+      )}
+      
+      <Register />
     </Map>
     </div>
   );

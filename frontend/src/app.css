@@ -24,6 +24,20 @@ input::placeholder,textarea::placeholder{
     color: black;
 }
 
+.button{
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    background: #000;
+    color: aliceblue;
+    cursor: pointer;
+}
+
+.buttons,.logout{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
 label{
     width: max-content;
     color: tomato;
