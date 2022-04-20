@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRef, useState } from "react"
 import "./register.css"
 
-function Register() {
+function Register({setShowRegister}) {
     const [success, setSuccess] = useState(false);
     const [failure, setFailure] = useState(false);
     const nameRef = useRef()
@@ -14,8 +14,8 @@ function Register() {
         e.preventDefault()
         const newUser = {
             username: nameRef.current.value,
-            email: nameRef.current.value,
-            password: nameRef.current.value,
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
         }
 
         try {
@@ -44,7 +44,7 @@ function Register() {
             <span className="failure">Something went wrong! Retry</span>
             )}
             </form>
-            <Cancel className="registerCancel"/>
+            <Cancel className="registerCancel" onClick={()=>setShowRegister(false)} />
     </div>
   )
 }

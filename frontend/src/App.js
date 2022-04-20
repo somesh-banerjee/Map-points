@@ -4,13 +4,14 @@ import { Star,Room } from '@material-ui/icons';
 import './app.css';
 import axios from 'axios';
 import Register from './components/Register';
+import Login from './components/Login';
 //import { format } from 'timeago.js';
 
 function App() {
-
+  const myStorage = window.localStorage
   const [pins,setPins] = useState([]);
   const [currentPlaceId, setCurrentPlaceId] = useState(null);
-  const [currentUsername, setCurrentUsername] = useState(null);
+  const [currentUsername, setCurrentUsername] = useState(myStorage.getItem('user'));
   const [newPlace, setNewPlace] = useState(null);
   const [title, setTitle] = useState(null);
   const [review, setReview] = useState(null);
@@ -69,6 +70,11 @@ function App() {
     } catch (e) {
       console.log(e)
     }
+  }
+
+  const handleLogout = async() => {
+    myStorage.removeItem('user')
+    setCurrentUsername(null)
   }
 
   return (
@@ -154,15 +160,29 @@ function App() {
       )}
 
       {currentUsername ? (
-        <button className='button logout'>Log out</button>
+        <button className='button logout' onClick={handleLogout}>Log out</button>
       ) : (
         <div className='buttons'>
-          <button className='button'>Log in</button>
-          <button className='button'>Register</button>
+          <button 
+            className='button login'
+            onClick={() => setShowLogin(true)}
+          >Log in</button>
+          <button
+            className='button'
+            onClick={() => setShowRegister(true)}
+          >Register</button>
         </div>
       )}
-      
-      <Register />
+      {
+        showRegister && <Register setShowRegister={setShowRegister} /> 
+      }
+      {
+        showLogin && <Login 
+          myStorage={myStorage} 
+          setShowLogin={setShowLogin}
+          setCurrentUsername={setCurrentUsername}
+        />
+      }
     </Map>
     </div>
   );

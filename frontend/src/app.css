@@ -38,6 +38,11 @@ input::placeholder,textarea::placeholder{
     top: 10px;
     right: 10px;
 }
+
+.login{
+    margin-right: 10px;
+}
+
 label{
     width: max-content;
     color: tomato;
