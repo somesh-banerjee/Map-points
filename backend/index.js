@@ -5,6 +5,7 @@ const app = express();
 const path = require('path')
 const pinRoute = require("./routes/pins");
 const userRoute = require("./routes/users");
+const port = process.env.PORT || 8080;
 dotenv.config();
  
 const __myPath = path.resolve();
@@ -32,6 +33,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__myPath, "frontend", "build", "index.html"))
 })
 
-app.listen(8080,()=>{
+app.listen(port,()=>{
     console.log("Backend Running")
 })
