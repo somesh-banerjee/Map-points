@@ -2,6 +2,7 @@
     "scripts": {
     "frontend": "cd frontend && npm start",
     "backend": "cd backend && npm start",
+    "start": "npm run backend",
     "dev": "concurrently --kill-others-on-fail \"npm run api\" \"npm run frontend\"",
     "heroku-postbuild": "cd frontend && npm install && npm run build"
   }
