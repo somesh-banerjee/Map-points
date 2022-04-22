@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true
 })
 .then(()=>{
-    console.log("MongoDB Connected");
+    console.log(`MongoDB Connected at ${port}`);
 })
 .catch((e) => console.log(e));
 
