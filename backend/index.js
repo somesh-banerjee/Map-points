@@ -8,7 +8,7 @@ const userRoute = require("./routes/users");
 const port = process.env.PORT || 8080;
 dotenv.config();
  
-const __myPath = path.resolve();
+//const __myPath = path.resolve();
 
 app.use(express.json());
 
@@ -25,13 +25,13 @@ app.use("/api/pins", pinRoute);
 
 // Serve static files from the React frontend app
 //app.use(express.static(path.join(__dirname, '../frontend/build')))
-app.use(express.static(path.join(__myPath, "/frontend/build")));
+//app.use(express.static(path.join(__myPath, "/frontend/build")));
 
 // AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
-app.get('*', (req, res) => {
+/*app.get('*', (req, res) => {
   //res.sendFile(path.join(__dirname + '/../frontend/build/index.html'))
   res.sendFile(path.resolve(__myPath, "frontend", "build", "index.html"))
-})
+})*/
 
 app.listen(port,()=>{
     console.log("Backend Running")
