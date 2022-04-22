@@ -89,7 +89,7 @@ function App() {
       onDblClick = {handleAddPlace}
       // transitionDuration="200"
     >
-      {
+      {pins &&
         pins.map(p=>(
           <div key={p._id}>
           <Marker
