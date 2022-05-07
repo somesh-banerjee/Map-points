@@ -13,11 +13,7 @@
     "nodemon": "^2.0.15"
   },
   "scripts": {
-    "frontend": "cd frontend && npm start",
-    "backend": "cd backend && npm start",
-    "start": "node backend/index.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run api\" \"npm run frontend\"",
-    "heroku-postbuild": "cd frontend && npm install && npm run build && cd ../backend && npm i"
+    "start": "nodemon index.js"
   },
   "author": "somesh",
   "license": "ISC"
